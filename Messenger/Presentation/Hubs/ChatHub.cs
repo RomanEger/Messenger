@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Messenger.Backend.Hubs;
+namespace Presentation.Hubs;
 
 public class ChatHub : Hub
 {
@@ -10,6 +10,7 @@ public class ChatHub : Hub
     public ChatHub(ILogger logger)
     {
         _logger = logger;
+        _logger.LogInformation($"{nameof(ChatHub)} invoked");
     }
     
     [Authorize]

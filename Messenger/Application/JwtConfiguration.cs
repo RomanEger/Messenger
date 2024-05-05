@@ -1,4 +1,4 @@
-﻿namespace Entities;
+﻿namespace Application;
 
 public class JwtConfiguration
 {

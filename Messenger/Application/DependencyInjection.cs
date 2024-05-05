@@ -1,16 +1,27 @@
 ﻿using System.Text;
-using Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Messenger.Backend.Extensions;
+namespace Application;
 
-public static class ServiceExtensions
+public static class DependencyInjection
 {
-    public static void ConfigureJwtSettings(this IServiceCollection services, IConfiguration configuration) =>
-        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
+    {
+        var assembly = (typeof(DependencyInjection).Assembly);
+
+        return services.AddValidatorsFromAssembly(assembly)
+            .ConfigureJwtSettings(configuration)
+            .ConfigureJwt(configuration);
+    }
     
-    public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection ConfigureJwtSettings(this IServiceCollection services, IConfiguration configuration) =>
+        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
+
+    private static IServiceCollection ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
     {
         var jwtConfiguration = new JwtConfiguration();
         configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
@@ -34,5 +45,7 @@ public static class ServiceExtensions
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.SecretKey))
             };
         });
+
+        return services;
     }
 }
