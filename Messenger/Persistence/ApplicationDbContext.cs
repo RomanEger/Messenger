@@ -13,6 +13,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<ChatMember> ChatMembers { get; set; }
     public DbSet<MessageType> MessageTypes { get; set; }
     public DbSet<Message> Messages { get; set; }
+    public DbSet<MemberRole> MemberRoles { get; set; }
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
         : base(options) {}
