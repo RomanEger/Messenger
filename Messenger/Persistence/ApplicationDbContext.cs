@@ -1,25 +1,28 @@
-﻿using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
 
-public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
+public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions options) 
-        : base(options)
-    {
-    }
-
-    public ApplicationDbContext()
-    {
-        
-    }
+    public DbSet<User> Users { get; set; }
+    public DbSet<UserPhoto> UserPhotos { get; set; }
+    public DbSet<ChatAccessibility> ChatAccessibilities { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<ChatType> ChatTypes { get; set; }
+    public DbSet<ChatMember> ChatMembers { get; set; }
+    public DbSet<MessageType> MessageTypes { get; set; }
+    public DbSet<Message> Messages { get; set; }
     
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+        : base(options) {}
+
+    public ApplicationDbContext() {}
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
+        
         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MessengerDb;Username=postgres;Password=qwerty");
     }
 
@@ -27,7 +30,6 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.HasDefaultSchema("identity");
+        modelBuilder.HasDefaultSchema("public");
     }
-
 }
