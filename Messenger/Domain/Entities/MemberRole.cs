@@ -1,6 +1,6 @@
 namespace Domain.Entities;
 
-public class MemberRole
+public class MemberRole : EntityBase
 {
-    
+    public string Role { get; private set; }
 }
