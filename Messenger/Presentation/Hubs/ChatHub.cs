@@ -5,8 +5,7 @@ namespace Presentation.Hubs;
 
 public class ChatHub(ILogger<ChatHub> logger) : Hub
 {
-    [Authorize]
-    public async Task Send(string message)
+    public async Task Send( string message)
     {
         await Clients.All.SendAsync("Receive", message);
         logger.LogInformation($"{nameof(Send)} message\r\n {message}");

@@ -1,5 +1,5 @@
+using System.Security.Claims;
 using Application;
-using Domain.Entities;
 using Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +16,7 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication()
-    .AddCookie(IdentityConstants.ApplicationScheme)
-    .AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthentication();
 
 builder.Services.AddAuthorization();
 
@@ -27,12 +25,8 @@ builder.Host.UseSerilog((context, configuration) =>
 
 builder.Services.AddSignalR();
 
-builder.Services.AddIdentityCore<User>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddApiEndpoints();
-
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
-     o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase")));
+    o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase")));
 
 var app = builder.Build();
 
@@ -40,12 +34,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();
-
-app.MapIdentityApi<User>();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -55,6 +46,6 @@ app.UseStaticFiles();
 
 app.UseSerilogRequestLogging();
 
-app.MapHub<ChatHub>("/chat");  
+app.MapHub<ChatHub>("/chat");
 
 app.Run();
