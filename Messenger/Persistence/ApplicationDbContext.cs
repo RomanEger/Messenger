@@ -25,11 +25,4 @@ public class ApplicationDbContext : DbContext
         
         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MessengerDb;Username=postgres;Password=qwerty");
     }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-
-        modelBuilder.HasDefaultSchema("public");
-    }
 }
