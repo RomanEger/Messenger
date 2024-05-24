@@ -1,6 +1,10 @@
+using Domain.Entities;
+
 namespace Domain.Repositories;
 
-public class IChatMemberRepository
+public interface IChatMemberRepository
 {
-    
+    Task AddMemberAsync(ChatMember chatMember);
+
+    void RemoveMember(ChatMember chatMember);
 }
