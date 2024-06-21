@@ -1,14 +1,11 @@
 using Domain.Repositories;
-using Persistence;
 
-namespace Infrastructure.Repositories;
+namespace Persistence.Repositories;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork(ApplicationDbContext dbContext) : IUnitOfWork
 {
-    private readonly ApplicationDbContext _dbContext;
-    
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

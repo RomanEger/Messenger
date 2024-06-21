@@ -28,7 +28,7 @@ public class User : EntityBase
     [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,20}$")]
     public string Password { get; set; }
     
-    public DateTime RegistrationDate { get; private set; } = DateTime.Now;
+    public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
     
     public ICollection<UserPhoto> UserPhotos { get; set; }
     public ICollection<Message> Messages { get; set; }

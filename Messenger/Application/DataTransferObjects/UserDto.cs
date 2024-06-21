@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.DataTrasnferObjects;
+namespace Application.DataTransferObjects;
 
 public record UserDto(
     [Required]

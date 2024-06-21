@@ -1,18 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.DataTrasnferObjects;
+namespace Application.DataTransferObjects;
 
 public record UserForRegistrationDto(
     [Required]
-    [MaxLength(120)]
-    string UserName,
-    [Required]
-    [MaxLength(120)]
     string Email,
     [Required]
-    [MaxLength(20)]
+    string UserName,
+    [Required]
     string PhoneNumber,
     [Required]
-    [MaxLength(70)]
-    string Password
-    );
+    string Password);
