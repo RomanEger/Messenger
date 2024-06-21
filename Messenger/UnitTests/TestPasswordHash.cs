@@ -7,7 +7,7 @@ namespace UnitTests;
 public class TestPasswordHash
 {
     [Fact]
-    public void TestPasswordHasher()
+    public void Test_PasswordHasher()
     {
         PasswordHasher<User> hasher = new PasswordHasher<User>();
         var user = new User();

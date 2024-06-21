@@ -6,6 +6,7 @@ using Application.DataTransferObjects;
 using Application.Services.Contracts;
 using Domain.Entities;
 using Domain.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 
@@ -15,7 +16,8 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly JwtOptions _jwtOptions;
     private readonly IUserRepository _userRepository;
-    
+    private readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
+        
     public AuthenticationService(IOptions<JwtOptions> options, IUserRepository userRepository)
     {
         _jwtOptions = options.Value;
@@ -28,9 +30,9 @@ public class AuthenticationService : IAuthenticationService
         {
             UserName = userForRegistrationDto.UserName,
             PhoneNumber = userForRegistrationDto.PhoneNumber,
-            Email = userForRegistrationDto.Email,
-            Password = userForRegistrationDto.Password
+            Email = userForRegistrationDto.Email
         };
+        user.Password = _passwordHasher.HashPassword(user, userForRegistrationDto.Password);
         return await _userRepository.CreateAsync(user);
     }
 
@@ -62,7 +64,10 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<string?> LoginAsync(UserForAuthenticationDto userForAuthenticationDto)
     {
-        var user = await _userRepository.FindByConditionAsync(x => x.Password == userForAuthenticationDto.Password && (x.Email == userForAuthenticationDto.UserPersonalData || x.PhoneNumber == userForAuthenticationDto.UserPersonalData));
-        return user == null ? null : GenerateJwt(new UserDto(user.UserName));
+        var user = await _userRepository.FindByConditionAsync(x => x.Email == userForAuthenticationDto.UserPersonalData || x.PhoneNumber == userForAuthenticationDto.UserPersonalData);
+        if (user is null)
+            return null;
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, userForAuthenticationDto.Password);
+        return result != PasswordVerificationResult.Success ? null : GenerateJwt(new UserDto(user.UserName));
     }
 }

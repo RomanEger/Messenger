@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Entities;
@@ -8,25 +11,61 @@ namespace Domain.Entities;
 [Index("PhoneNumber", IsUnique = true)]
 public class User : EntityBase
 {
-    [Required]
+    [NotMapped]
+    private string _email;
+    
     [MaxLength(320)]
-    [RegularExpression("^(?=.{1,320}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")]
-    public string Email { get; set; }
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            if (Regex.IsMatch(value, "^(?=.{1,320}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"))
+                _email = value;
+        }
+    }
     
-    [Required]
+    [NotMapped]
+    private string _userName;
+
     [MaxLength(120)]
-    [RegularExpression("^(?!.*\\s)[\\w.-]{3,120}$")]
-    public string UserName { get; set; }
-    
-    [Required]
+    public string UserName
+    {
+        get => _userName;
+        set
+        {
+            if (Regex.IsMatch(value, "^(?!.*\\\\s)[\\\\w.-]{3,120}$"))
+                _userName = value;
+        }
+    }
+
+    [NotMapped]
+    private string _phoneNumber;
+
     [MaxLength(20)]
-    [RegularExpression("^\\\\+?[1-9]\\\\d{10}$")]
-    public string PhoneNumber { get; set; }
+    public string PhoneNumber
+    {
+        get => _phoneNumber;
+        set
+        {
+            if (Regex.IsMatch(value, "^\\\\+?[1-9]\\\\d{10}$"))
+                _phoneNumber = value;
+        }
+    }
+
+    [NotMapped]
+    private string _password;
     
-    [Required]
     [MaxLength(70)]
-    [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,20}$")]
-    public string Password { get; set; }
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            if (Regex.IsMatch(value, "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,20}$"))
+                _password = new PasswordHasher<User>().HashPassword(this, value);
+        }
+    }
     
     public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
     
