@@ -2,21 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Persistence;
 
 #nullable disable
 
-namespace Persistence.Migrations.ApplicationDb
+namespace Infrastructure.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240519123917_AddAttributes")]
-    partial class AddAttributes
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,12 +75,17 @@ namespace Persistence.Migrations.ApplicationDb
                     b.Property<Guid>("ChatId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("MemberRoleId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
+
+                    b.HasIndex("MemberRoleId");
 
                     b.HasIndex("UserId");
 
@@ -109,6 +110,21 @@ namespace Persistence.Migrations.ApplicationDb
                     b.HasKey("Id");
 
                     b.ToTable("ChatTypes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MemberRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MemberRoles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Message", b =>
@@ -257,6 +273,12 @@ namespace Persistence.Migrations.ApplicationDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.MemberRole", "MemberRole")
+                        .WithMany()
+                        .HasForeignKey("MemberRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("ChatMembers")
                         .HasForeignKey("UserId")
@@ -264,6 +286,8 @@ namespace Persistence.Migrations.ApplicationDb
                         .IsRequired();
 
                     b.Navigation("Chat");
+
+                    b.Navigation("MemberRole");
 
                     b.Navigation("User");
                 });

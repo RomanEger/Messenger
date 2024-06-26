@@ -2,12 +2,11 @@ using Application;
 using Application.Services;
 using Application.Services.Contracts;
 using Domain.Repositories;
-using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Persistence;
-using Persistence.Repositories;
+using Infrastructure;
+using Infrastructure.Repositories;
 using Presentation.Hubs;
 using Presentation.OptionsSetup;
 using Serilog;
@@ -16,8 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure()
-    .AddPersistence();
+    .AddInfrastructure();
 
 builder.Services.AddControllers();
 

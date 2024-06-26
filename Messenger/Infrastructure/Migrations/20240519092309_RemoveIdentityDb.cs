@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Persistence.Migrations.ApplicationDb
+namespace Infrastructure.Migrations.ApplicationDb
 {
     /// <inheritdoc />
     public partial class RemoveIdentityDb : Migration

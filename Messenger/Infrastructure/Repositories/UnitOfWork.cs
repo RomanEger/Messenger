@@ -1,6 +1,6 @@
 using Domain.Repositories;
 
-namespace Persistence.Repositories;
+namespace Infrastructure.Repositories;
 
 public class UnitOfWork(ApplicationDbContext dbContext) : IUnitOfWork
 {

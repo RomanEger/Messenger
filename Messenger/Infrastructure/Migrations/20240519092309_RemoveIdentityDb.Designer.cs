@@ -5,21 +5,21 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Persistence;
 
 #nullable disable
 
-namespace Persistence.Migrations.ApplicationDb
+namespace Infrastructure.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240519160921_AddMemberRoles")]
-    partial class AddMemberRoles
+    [Migration("20240519092309_RemoveIdentityDb")]
+    partial class RemoveIdentityDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("public")
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -47,7 +47,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("ChatTypeId");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatAccessibility", b =>
@@ -67,7 +67,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChatAccessibilities");
+                    b.ToTable("ChatAccessibilities", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatMember", b =>
@@ -79,9 +79,6 @@ namespace Persistence.Migrations.ApplicationDb
                     b.Property<Guid>("ChatId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MemberRoleId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -89,11 +86,9 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("ChatId");
 
-                    b.HasIndex("MemberRoleId");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("ChatMembers");
+                    b.ToTable("ChatMembers", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatType", b =>
@@ -113,22 +108,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChatTypes");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MemberRole", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MemberRoles");
+                    b.ToTable("ChatTypes", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.Message", b =>
@@ -164,7 +144,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.MessageType", b =>
@@ -184,7 +164,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("MessageTypes");
+                    b.ToTable("MessageTypes", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -195,8 +175,8 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(320)
-                        .HasColumnType("character varying(320)");
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -227,7 +207,7 @@ namespace Persistence.Migrations.ApplicationDb
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserPhoto", b =>
@@ -247,7 +227,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPhotos");
+                    b.ToTable("UserPhotos", "public");
                 });
 
             modelBuilder.Entity("Domain.Entities.Chat", b =>
@@ -277,12 +257,6 @@ namespace Persistence.Migrations.ApplicationDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.MemberRole", "MemberRole")
-                        .WithMany()
-                        .HasForeignKey("MemberRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("ChatMembers")
                         .HasForeignKey("UserId")
@@ -290,8 +264,6 @@ namespace Persistence.Migrations.ApplicationDb
                         .IsRequired();
 
                     b.Navigation("Chat");
-
-                    b.Navigation("MemberRole");
 
                     b.Navigation("User");
                 });

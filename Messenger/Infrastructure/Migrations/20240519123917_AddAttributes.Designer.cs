@@ -5,22 +5,20 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Persistence;
 
 #nullable disable
 
-namespace Persistence.Migrations.ApplicationDb
+namespace Infrastructure.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240510031610_InitialAppCreate")]
-    partial class InitialAppCreate
+    [Migration("20240519123917_AddAttributes")]
+    partial class AddAttributes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("public")
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -48,7 +46,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("ChatTypeId");
 
-                    b.ToTable("Chats", "public");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatAccessibility", b =>
@@ -68,7 +66,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChatAccessibilities", "public");
+                    b.ToTable("ChatAccessibilities");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatMember", b =>
@@ -89,7 +87,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ChatMembers", "public");
+                    b.ToTable("ChatMembers");
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatType", b =>
@@ -109,7 +107,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChatTypes", "public");
+                    b.ToTable("ChatTypes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Message", b =>
@@ -145,7 +143,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages", "public");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Domain.Entities.MessageType", b =>
@@ -165,7 +163,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("MessageTypes", "public");
+                    b.ToTable("MessageTypes");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -176,8 +174,8 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("character varying(120)");
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -208,7 +206,7 @@ namespace Persistence.Migrations.ApplicationDb
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users", "public");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Domain.Entities.UserPhoto", b =>
@@ -228,7 +226,7 @@ namespace Persistence.Migrations.ApplicationDb
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPhotos", "public");
+                    b.ToTable("UserPhotos");
                 });
 
             modelBuilder.Entity("Domain.Entities.Chat", b =>
