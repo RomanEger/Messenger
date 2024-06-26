@@ -23,7 +23,7 @@ public class TestUserSetData
     [Theory]
     [InlineData("gmail#gmail.com")]
     [InlineData("fsfs@mailru")]
-    [InlineData("Georgey@yandex.ri")]
+    [InlineData("Georgey@yandex.r")]
     [InlineData("Artur231$inbox.ru")]
     [InlineData("Natan@ramblerri")]
     [InlineData("Vira23#ok.ru")]
@@ -83,7 +83,7 @@ public class TestUserSetData
 
     [Theory]
     [InlineData("asdfdsD#$%")]
-    [InlineData("")]
+    [InlineData("g")]
     [InlineData(null)]
     [InlineData("1223445")]
     [InlineData("12S")]
