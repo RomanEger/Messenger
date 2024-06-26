@@ -12,7 +12,7 @@ namespace Domain.Entities;
 public class User : EntityBase
 {
     [NotMapped]
-    private string _email;
+    private string _email = "";
     
     [MaxLength(320)]
     public string Email
@@ -26,7 +26,7 @@ public class User : EntityBase
     }
     
     [NotMapped]
-    private string _userName;
+    private string _userName = "";
 
     [MaxLength(120)]
     public string UserName
@@ -40,7 +40,7 @@ public class User : EntityBase
     }
 
     [NotMapped]
-    private string _phoneNumber;
+    private string _phoneNumber = "";
 
     [MaxLength(20)]
     public string PhoneNumber
@@ -54,7 +54,7 @@ public class User : EntityBase
     }
 
     [NotMapped]
-    private string _password;
+    private string _password = "";
     
     [MaxLength(70)]
     public string Password
