@@ -20,7 +20,7 @@ public class User : EntityBase
         get => _email;
         set
         {
-            if (Regex.IsMatch(value, "^(?=.{1,320}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"))
+            if (value != null && Regex.IsMatch(value, "^(?=.{1,320}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"))
                 _email = value;
         }
     }
@@ -34,7 +34,7 @@ public class User : EntityBase
         get => _userName;
         set
         {
-            if (Regex.IsMatch(value, "^(?!.*\\\\s)[\\\\w.-]{3,120}$"))
+            if (value != null && Regex.IsMatch(value, "^(?!.*\\\\s)[\\\\w.-]{3,120}$"))
                 _userName = value;
         }
     }
@@ -48,7 +48,7 @@ public class User : EntityBase
         get => _phoneNumber;
         set
         {
-            if (Regex.IsMatch(value, "^\\\\+?[1-9]\\\\d{10}$"))
+            if (value != null && Regex.IsMatch(value, "^\\\\+?[1-9]\\\\d{10}$"))
                 _phoneNumber = value;
         }
     }
@@ -62,7 +62,7 @@ public class User : EntityBase
         get => _password;
         set
         {
-            if (Regex.IsMatch(value, "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,20}$"))
+            if (value != null && Regex.IsMatch(value, "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,20}$"))
                 _password = new PasswordHasher<User>().HashPassword(this, value);
         }
     }
