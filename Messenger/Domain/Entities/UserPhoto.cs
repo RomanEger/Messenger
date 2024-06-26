@@ -2,8 +2,8 @@
 
 public class UserPhoto : EntityBase
 {
-    public Guid UserId { get; private set; }
-    public byte[] Photo { get; private set; }
+    public Guid UserId { get; set; }
+    public byte[] Photo { get; set; }
     
-    public User? User { get; private set; }
+    public User? User { get; set; }
 }

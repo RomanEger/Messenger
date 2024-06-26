@@ -5,5 +5,5 @@ namespace Domain.Entities;
 public class EntityBase
 {
     [Key]
-    public Guid Id { get; protected set; }
+    public Guid Id { get; set; }
 }
