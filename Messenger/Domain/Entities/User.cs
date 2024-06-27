@@ -20,7 +20,7 @@ public class User : EntityBase
         get => _email;
         set
         {
-            if (value != null && Regex.IsMatch(value, "^(?=.{1,320}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"))
+            if (value != null && Regex.IsMatch(value, "^(?=.{1,300}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,20}$"))
                 _email = value;
         }
     }
@@ -34,11 +34,25 @@ public class User : EntityBase
         get => _userName;
         set
         {
-            if (value != null && Regex.IsMatch(value, "^(?!.*\\\\s)[\\\\w.-]{3,120}$"))
+            if (value != null && Regex.IsMatch(value, "^[@]{1}(?!.*\\\\s)[\\\\w]{3,120}$"))
                 _userName = value;
         }
     }
 
+    [NotMapped] 
+    private string _nickName = "";
+
+    [MaxLength(120)]
+    public string NickName
+    {
+        get => _nickName;
+        set
+        {
+            if (value != null && Regex.IsMatch(value, "^(?!.*\\\\s)[\\\\w.-]{3,120}$"))
+                _userName = value;
+        }
+    }
+    
     [NotMapped]
     private string _phoneNumber = "";
 

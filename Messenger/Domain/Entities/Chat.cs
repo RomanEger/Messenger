@@ -1,7 +1,11 @@
-﻿namespace Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace Domain.Entities;
+
+[Index("ChatName", IsUnique = true)]
 public class Chat : EntityBase
 {
+    public string ChatName { get; set; }
     public string Name { get; set; }
     public Guid ChatTypeId { get; set; }
     public Guid ChatAccessibilityId { get; set; }
