@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Presentation.Hubs;
 
+[Authorize]
 public class ChatHub(ILogger<ChatHub> logger) : Hub
 {
-    //[Authorize]
     public async Task Send(MessageDto message)
     {
         await Clients.All.SendAsync("Receive", message.Message);

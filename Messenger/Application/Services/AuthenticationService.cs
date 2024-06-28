@@ -30,9 +30,10 @@ public class AuthenticationService : IAuthenticationService
         {
             UserName = userForRegistrationDto.UserName,
             PhoneNumber = userForRegistrationDto.PhoneNumber,
-            Email = userForRegistrationDto.Email
+            Email = userForRegistrationDto.Email,
+            Password = userForRegistrationDto.Password
         };
-        user.Password = _passwordHasher.HashPassword(user, userForRegistrationDto.Password);
+        //user.Password = _passwordHasher.HashPassword(user, userForRegistrationDto.Password);
         return await _userRepository.CreateAsync(user);
     }
 

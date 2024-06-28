@@ -12,8 +12,10 @@
 <div id="chatroom"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
 <script>
+    let token = window.prompt("token: ");
+    
     const hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl("/chat")
+        .withUrl("/chat", { accessTokenFactory: () => token })
         .build();
 
     document.getElementById("sendBtn").addEventListener("click", function () {
