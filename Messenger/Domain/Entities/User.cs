@@ -12,7 +12,7 @@ namespace Domain.Entities;
 public class User : EntityBase
 {
     [NotMapped]
-    private string _email = "";
+    private string _email;
     
     [MaxLength(320)]
     public string Email
@@ -26,7 +26,7 @@ public class User : EntityBase
     }
     
     [NotMapped]
-    private string _userName = "";
+    private string _userName;
 
     [MaxLength(120)]
     public string UserName
@@ -34,13 +34,13 @@ public class User : EntityBase
         get => _userName;
         set
         {
-            if (value != null && Regex.IsMatch(value, "^[@]{1}(?!.*\\\\s)[\\\\w]{3,120}$"))
+            if (value != null && Regex.IsMatch(value, "^[@]{1}(?!.*\\s)[\\w]{3,120}$"))
                 _userName = value;
         }
     }
 
     [NotMapped] 
-    private string _nickName = "";
+    private string _nickName;
 
     [MaxLength(120)]
     public string NickName
@@ -48,13 +48,13 @@ public class User : EntityBase
         get => _nickName;
         set
         {
-            if (value != null && Regex.IsMatch(value, "^(?!.*\\\\s)[\\\\w.-]{3,120}$"))
-                _userName = value;
+            if (value != null && Regex.IsMatch(value, "^(?!.*\\s)[\\w.-]{3,120}$"))
+                _nickName = value;
         }
     }
-    
-    [NotMapped]
-    private string _phoneNumber = "";
+
+    [NotMapped] 
+    private string _phoneNumber;
 
     [MaxLength(20)]
     public string PhoneNumber
@@ -62,13 +62,13 @@ public class User : EntityBase
         get => _phoneNumber;
         set
         {
-            if (value != null && Regex.IsMatch(value, "^\\\\+?[1-9]\\\\d{10}$"))
+            if (value != null && Regex.IsMatch(value, "^\\+?[1-9]\\d{10}$"))
                 _phoneNumber = value;
         }
     }
 
     [NotMapped]
-    private string _password = "";
+    private string _password;
     
     [MaxLength(70)]
     public string Password

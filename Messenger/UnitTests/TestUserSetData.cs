@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace UnitTests;
 
@@ -42,20 +43,20 @@ public class TestUserSetData
     [InlineData("@Awfqcds23")]
     [InlineData("@Nsawe324")]
     [InlineData("@Ldser52")]
+    [InlineData("@super")]
     public void Test_ValidUserName(string userName)
     {
         var user = new User()
         {
             UserName = userName
         };
-        Assert.NotEqual(user.UserName, userName);
+        Assert.Equal(user.UserName, userName);
     }
 
     [Theory]
     [InlineData("asdfdsD@")]
     [InlineData("@g")]
     [InlineData("@roman4k/")]
-    [InlineData(null)]
     [InlineData("12pl]-=`")]
     [InlineData("@12")]
     [InlineData("@dsffdg231423#&@*$&@")]
@@ -70,22 +71,19 @@ public class TestUserSetData
     
     [Theory]
     [InlineData("rfdjfrA231")]
-    [InlineData("@uerse3423A")]
-    [InlineData("Awf0-=qcds23")]
-    [InlineData("@N_12/sawe324")]
-    [InlineData("@Ldse#ds`r52")]
+    [InlineData("rom4k")]
+    [InlineData("Руслан")]
     public void Test_ValidNickName(string nickName)
     {
         var user = new User()
         {
             NickName = nickName
         };
-        Assert.NotEqual(user.NickName, nickName);
+        Assert.Equal(user.NickName, nickName);
     }
 
     [Theory]
     [InlineData("@g")]
-    [InlineData(null)]
     [InlineData("12")]
     public void Test_InvalidNickName(string nickName)
     {
@@ -102,13 +100,14 @@ public class TestUserSetData
     [InlineData("+79335769267")]
     [InlineData("+71234569856")]
     [InlineData("+79567216784")]
+    [InlineData("89136836874")]
     public void Test_ValidPhoneNumber(string phoneNumber)
     {
         var user = new User()
         {
             PhoneNumber = phoneNumber
         };
-        Assert.NotEqual(user.PhoneNumber, phoneNumber);
+        Assert.Equal(user.PhoneNumber, phoneNumber);
     }
 
     [Theory]
@@ -138,13 +137,13 @@ public class TestUserSetData
         {
             Password = password
         };
-        Assert.NotEqual(user.Password, password);
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
+        Assert.Equal(PasswordVerificationResult.Success, result);
     }
 
     [Theory]
     [InlineData("asdfdsD#$%")]
     [InlineData("g")]
-    [InlineData(null)]
     [InlineData("1223445")]
     [InlineData("12S")]
     [InlineData("dsffdg231423#&@*$&@")]
@@ -154,7 +153,16 @@ public class TestUserSetData
         {
             Password = password
         };
-        Assert.NotEqual(user.Password, password);
+        try
+        {
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
+            Assert.NotEqual(PasswordVerificationResult.Success, result);
+        }
+        catch
+        {
+            Assert.Equal(user.Password, null);
+        }
     }
 
+    private PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
 }
