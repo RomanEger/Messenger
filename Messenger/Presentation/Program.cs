@@ -13,6 +13,8 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services
     .AddApplication()
     .AddInfrastructure();
@@ -36,7 +38,6 @@ builder.Services.AddSwaggerGen(c =>
     };
     c.AddSecurityDefinition("jwt_auth", securityDefinition);
 
-// Make sure swagger UI requires a Bearer token specified
     OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
     {
         Reference = new OpenApiReference()
@@ -71,6 +72,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(o =>
 builder.Services.AddCors();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

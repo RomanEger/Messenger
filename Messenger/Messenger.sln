@@ -1,14 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{F7C4C7A3-F74A-470C-9792-6EE7EC3F6033}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{F7C4C7A3-F74A-470C-9792-6EE7EC3F6033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{99137BAD-30E8-4753-AAA0-51FE105F8968}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{99137BAD-30E8-4753-AAA0-51FE105F8968}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{B4D30F3C-F9CF-4594-BDC4-8FC9DC491AF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{B4D30F3C-F9CF-4594-BDC4-8FC9DC491AF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4668A1E7-0F52-4BD4-A032-12EF89ED7BC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4668A1E7-0F52-4BD4-A032-12EF89ED7BC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1D22FA45-509E-46F0-8637-9AC96B07A86F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1D22FA45-509E-46F0-8637-9AC96B07A86F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger.AppHost", "Messenger.AppHost\Messenger.AppHost.csproj", "{DDADA8A5-E6F8-4777-A53E-ED7FDD1BE898}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger.ServiceDefaults", "Messenger.ServiceDefaults\Messenger.ServiceDefaults.csproj", "{18B862B5-FDE6-49E9-8F50-9CAE0D76A422}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,7 +43,16 @@ Global
 		{1D22FA45-509E-46F0-8637-9AC96B07A86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D22FA45-509E-46F0-8637-9AC96B07A86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D22FA45-509E-46F0-8637-9AC96B07A86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDADA8A5-E6F8-4777-A53E-ED7FDD1BE898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDADA8A5-E6F8-4777-A53E-ED7FDD1BE898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDADA8A5-E6F8-4777-A53E-ED7FDD1BE898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDADA8A5-E6F8-4777-A53E-ED7FDD1BE898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18B862B5-FDE6-49E9-8F50-9CAE0D76A422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18B862B5-FDE6-49E9-8F50-9CAE0D76A422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18B862B5-FDE6-49E9-8F50-9CAE0D76A422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18B862B5-FDE6-49E9-8F50-9CAE0D76A422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
