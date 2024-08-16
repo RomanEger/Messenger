@@ -8,6 +8,8 @@ public record UserForRegistrationDto(
     [Required]
     string UserName,
     [Required]
+    string NickName,
+    [Required]
     string PhoneNumber,
     [Required]
     string Password);

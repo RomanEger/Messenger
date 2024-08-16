@@ -29,6 +29,7 @@ public class AuthenticationService : IAuthenticationService
         var user = new User()
         {
             UserName = userForRegistrationDto.UserName,
+            NickName = userForRegistrationDto.NickName,
             PhoneNumber = userForRegistrationDto.PhoneNumber,
             Email = userForRegistrationDto.Email,
             Password = userForRegistrationDto.Password
