@@ -70,7 +70,7 @@ public class User : EntityBase
     [NotMapped]
     private string _password;
     
-    [MaxLength(70)]
+    [MaxLength(250)]
     public string Password
     {
         get => _password;
