@@ -7,9 +7,20 @@ namespace Presentation.Hubs;
 [Authorize]
 public class ChatHub(ILogger<ChatHub> logger) : Hub
 {
+    private enum Method
+    {
+        Receive,
+        Send,
+        Notify
+    }
+    
     public async Task Send(MessageDto message)
     {
-        await Clients.All.SendAsync("Receive", message.Message);
-        logger.LogInformation($"User {message.UserName} {nameof(Send)} message\r\n {message.Message}");
+        await Clients.All.SendAsync(Method.Receive.ToString(), message.Message);
+    }
+
+    public async Task SendByChatId(MessageDto message)
+    {
+        await Clients.Group(message.ChatId.ToString()).SendAsync(Method.Receive.ToString(), message.Message);
     }
 }

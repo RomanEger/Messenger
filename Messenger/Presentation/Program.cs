@@ -68,6 +68,8 @@ builder.Services.AddSignalR();
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
     o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase")));
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -85,6 +87,8 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseSerilogRequestLogging();
+
+app.UseCors(policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader());
 
 app.MapHub<ChatHub>("/chat");
 
