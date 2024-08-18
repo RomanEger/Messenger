@@ -24,6 +24,7 @@ public class ApplicationDbContext : DbContext
     {
         base.OnConfiguring(optionsBuilder);
         
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MessengerDb;Username=postgres;Password=qwerty");
+        //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MessengerDb;Username=postgres;Password=qwerty");
+        optionsBuilder.LogTo(Console.WriteLine);
     }
 }
