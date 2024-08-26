@@ -1,0 +1,408 @@
+﻿<Window x:Class="LayoutMobile.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LayoutMobile"
+        mc:Ignorable="d"
+        Height="800"
+        Width="500"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
+
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,500,800" RadiusX="55" RadiusY="50"/>
+    </Window.Clip>
+
+    <Grid>
+        <!--<Frame 
+            Background="#FF656565"
+            Panel.ZIndex="1"
+            NavigationUIVisibility="Hidden"
+            Margin="0,0,0,765"/>-->
+
+        <Frame
+            Background="#FF8B97FD"
+            NavigationUIVisibility="Hidden"
+            Panel.ZIndex="1"/>
+
+        <!--<Label 
+            Content="19:57" 
+            Foreground="White"
+            FontWeight="Bold"
+            FontSize="17"
+            HorizontalAlignment="Left" 
+            Margin="64,0,0,0"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"/>-->
+
+        <Label 
+            Content="Все права защищены ©" 
+            Foreground="#FFE6E6E6"
+            FontWeight="Bold"
+            FontSize="14"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="15,20"
+            Panel.ZIndex="1"/>
+
+        <Line
+            X1="0" 
+            Y1="100"
+            X2="470"
+            Y2="100"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Stroke="White"
+            StrokeThickness="4"
+            Panel.ZIndex="1"
+            Margin="0,613,0,0"/>
+
+        <Line 
+            StrokeEndLineCap="Round"
+            StrokeStartLineCap="Round"
+            X1="0" 
+            Y1="100"
+            X2="110"
+            Y2="100"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Stroke="White"
+            StrokeThickness="4"
+            Panel.ZIndex="1"
+            Margin="0,688,0,0"/>
+
+        <!--<Line 
+            StrokeEndLineCap="Round"
+            StrokeStartLineCap="Round"
+            X1="0" 
+            Y1="100"
+            X2="170"
+            Y2="100"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Stroke="#FF5B5B5B"
+            StrokeThickness="4"
+            Panel.ZIndex="1"
+            Margin="0,298,0,0"/>-->
+
+        <!--<Rectangle
+            Panel.ZIndex="1"
+            Fill="#FF2B2B2B"
+            Width="130"
+            Height="100"
+            RadiusX="22.222"
+            RadiusY="22.222" 
+            Margin="185,-70,185,770" />-->
+
+        <!--<Rectangle 
+            Panel.ZIndex="1"
+            Fill="White" 
+            Width="4"
+            StrokeThickness="25"
+            Height="3.75" 
+            RadiusX="15"
+            RadiusY="1" 
+            Margin="320,11,160,765"/>
+        <Rectangle 
+            Panel.ZIndex="1"
+            Fill="White" 
+            Width="4"
+            StrokeThickness="25"
+            Height="7.5" 
+            RadiusX="15"
+            RadiusY="1" 
+            Margin="320,7,145,765"/>
+        <Rectangle 
+            Panel.ZIndex="1"
+            Fill="White" 
+            Width="4"
+            StrokeThickness="25"
+            Height="11.25" 
+            RadiusX="15"
+            RadiusY="1" 
+            Margin="320,3,130,765"/>
+        <Rectangle 
+            Panel.ZIndex="1"
+            Fill="White" 
+            Width="4"
+            StrokeThickness="25"
+            Height="15" 
+            RadiusX="15"
+            RadiusY="1" 
+            Margin="320,-1,115,765"/>-->
+
+        <Border 
+            BorderThickness="3"
+            BorderBrush="black"
+            CornerRadius="48"
+            Opacity="1"
+            Panel.ZIndex="1" Height="800" VerticalAlignment="Top">
+
+        </Border>
+
+        <!--<Image 
+            Panel.ZIndex="1"
+            Margin="416,-4,47,760" 
+            Height="28"
+            Width="30"
+            Source="/img.icons8.png" 
+            Stretch="UniformToFill"/>-->
+
+        <Border CornerRadius="40,40,40,40" Panel.ZIndex="1" Margin="172,36,160,636">
+            <Border.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/smart horizon.png" />
+            </Border.Background>
+        </Border>
+
+        <!--<Label-->
+        <!--Content="LTE" 
+            Foreground="White"
+            FontWeight="Bold"
+            FontSize="17"
+            HorizontalAlignment="Left" 
+            Margin="367,0,0,0"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"/>-->
+
+        <Label 
+            Content="HorizonIM" 
+            Foreground="White"
+            FontWeight="Bold"
+            FontSize="24"
+            HorizontalAlignment="Left" 
+            Margin="313,720,0,0"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1" 
+            FontFamily="Rockwell Extra Bold"/>
+
+        <!--<Label 
+            Content="⌕" 
+            Foreground="#FFBDA7ED"
+            FontWeight="Bold"
+            FontSize="32"
+            HorizontalAlignment="Center" 
+            Margin="450,30,0,0"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1" 
+            FontFamily="Rockwell Extra Bold"/>-->
+
+        <Border
+            Panel.ZIndex="1"
+            Margin="124,273,112,255" 
+            Background="#FFE4E4E4"
+            CornerRadius="18,18,18,18">
+
+            <Grid
+            Panel.ZIndex="1" 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Height="330" Width="238">
+
+                <!--<Line 
+            StrokeEndLineCap="Round"
+            StrokeStartLineCap="Round"
+            X1="0" 
+            Y1="100"
+            X2="170"
+            Y2="100"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Stroke="#FF5B5B5B"
+            StrokeThickness="4"
+            Panel.ZIndex="1"
+            Margin="0,49,0,0"/>-->
+
+                <TextBox 
+            FontFamily="Comic Sans MS"
+            Background="#FFB9B9B9"
+            Text="+7 (918) 356 48-09"
+            TextAlignment="Center"
+            FontSize="16"
+            BorderBrush="#FF9989BD"
+            Foreground="Black"
+            Width="166"
+            Panel.ZIndex="1"
+            Margin="0,122,0,0"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <Label 
+            Content="Авторизация" 
+            Foreground="#FF8B97FD"
+            FontWeight="Bold"
+            FontSize="24"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1" 
+            FontFamily="Rockwell Extra Bold" Margin="0,45,0,0"/>
+
+                <Label 
+            Content="Телефон" 
+            Foreground="#FF86A6D0"
+            FontWeight="Bold"
+            FontSize="16"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"
+            Margin="0,88,0,0"
+            Panel.ZIndex="1" 
+            FontFamily="Rockwell Extra Bold"/>
+
+
+
+
+                <!--<Label 
+                    Content="Логин" 
+                    Foreground="#FF86A6D0"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1" 
+                Margin="0,201,0,0"
+                    FontFamily="Rockwell Extra Bold"/>
+
+                <TextBox 
+            FontFamily="Comic Sans MS"
+            Background="#FFB9B9B9"
+            Text="Yurgg15"
+            TextAlignment="Center"
+            FontSize="16"
+            Foreground="Black"
+            Width="166"
+            Panel.ZIndex="1"
+            Margin="0,230,0,0"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>-->
+
+
+                <Label 
+                Content="Пароль" 
+                Foreground="#FF86A6D0"
+                FontWeight="Bold"
+                FontSize="16"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                Panel.ZIndex="1" 
+                Margin="0,165,0,0"
+                FontFamily="Rockwell Extra Bold"/>
+
+                <TextBox 
+                FontFamily="Comic Sans MS"
+                Background="#FFB9B9B9"
+                Text="************"
+                TextAlignment="Center"
+                FontSize="16"
+                Foreground="Black"
+                Width="166"
+                Panel.ZIndex="1"
+                Margin="0,199,0,0"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <Label 
+                    Content="Показать пароль 👀" 
+                    Foreground="#FF5B5B5B"
+                    FontWeight="Bold"
+                    FontSize="13"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1" 
+                    FontFamily="Rockwell Extra Bold"
+                Margin="10,259,0,0"/>
+
+                <CheckBox
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                RenderTransformOrigin="9.952,1.924"
+                Margin="172,266,0,0"
+                Background="#FFB9B9B9"
+                IsChecked="False"/>
+
+                <Button 
+                    Panel.ZIndex="1"
+                    Content="Забыли пароль?"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="1.5"
+                    FontWeight="Bold"
+                    FontFamily="Bahnschrift"
+                    FontSize="10"
+                    Foreground="#FF5B5B5B"
+                    Margin="119,228,0,0"/>
+
+            </Grid>
+        </Border>
+
+
+        <Button 
+            Panel.ZIndex="1"
+            Width="140"
+            Content="Войти"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Margin="186,613,0,0"
+            Background="Transparent"
+            BorderBrush="White"
+            BorderThickness="1.5"
+            FontWeight="Bold"
+            FontFamily="Bahnschrift"
+            FontSize="19"
+            Foreground="#FFE4E4E4">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+        <Button 
+            Opacity="1"
+            Panel.ZIndex="1"
+            Width="140"
+            Content="Регистрация"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Margin="186,664,0,0"
+            Background="Transparent"
+            BorderBrush="White"
+            BorderThickness="1.5"
+            FontWeight="Bold"
+            FontFamily="Bahnschrift"
+            FontSize="17"
+            Foreground="#FFE4E4E4">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+    </Grid>
+</Window>
