@@ -64,12 +64,13 @@ public class AuthenticationService : IAuthenticationService
         return accessToken;
     }
 
-    public async Task<string?> LoginAsync(UserForAuthenticationDto userForAuthenticationDto)
+    public async Task<AuthenticationResult?> LoginAsync(UserForAuthenticationDto userForAuthenticationDto)
     {
         var user = await _userRepository.FindByConditionAsync(x => x.Email == userForAuthenticationDto.UserPersonalData || x.PhoneNumber == userForAuthenticationDto.UserPersonalData);
         if (user is null)
             return null;
         var result = _passwordHasher.VerifyHashedPassword(user, user.Password, userForAuthenticationDto.Password);
-        return result != PasswordVerificationResult.Success ? null : GenerateJwt(new UserDto(user.UserName));
+        var userDto = new UserDto(user.UserName);
+        return result != PasswordVerificationResult.Success ? null : new AuthenticationResult(GenerateJwt(userDto), userDto);
     }
 }
