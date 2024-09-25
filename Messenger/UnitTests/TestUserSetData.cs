@@ -71,6 +71,7 @@ public class TestUserSetData
     
     [Theory]
     [InlineData("rfdjfrA231")]
+    [InlineData("rfdjfr A231")]
     [InlineData("rom4k")]
     [InlineData("Руслан")]
     [InlineData("Roman EE")]
