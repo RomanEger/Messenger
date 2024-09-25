@@ -21,9 +21,6 @@ builder.Services
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {

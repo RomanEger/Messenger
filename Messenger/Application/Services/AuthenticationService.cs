@@ -66,7 +66,8 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<AuthenticationResult?> LoginAsync(UserForAuthenticationDto userForAuthenticationDto)
     {
-        var user = await _userRepository.FindByConditionAsync(x => x.Email == userForAuthenticationDto.UserPersonalData || x.PhoneNumber == userForAuthenticationDto.UserPersonalData);
+        var user = await _userRepository.FindByConditionAsync(
+            x => x.Email == userForAuthenticationDto.UserPersonalData || x.PhoneNumber == userForAuthenticationDto.UserPersonalData);
         if (user is null)
             return null;
         var result = _passwordHasher.VerifyHashedPassword(user, user.Password, userForAuthenticationDto.Password);

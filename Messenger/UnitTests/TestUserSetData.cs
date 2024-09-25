@@ -73,6 +73,8 @@ public class TestUserSetData
     [InlineData("rfdjfrA231")]
     [InlineData("rom4k")]
     [InlineData("Руслан")]
+    [InlineData("Roman EE")]
+    [InlineData("Роман ЕЕ")]
     public void Test_ValidNickName(string nickName)
     {
         var user = new User()
