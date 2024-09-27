@@ -1,14 +1,13 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 using Application.DataTransferObjects;
 using Application.Services.Contracts;
 using Domain.Entities;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services;
 
@@ -34,7 +33,6 @@ public class AuthenticationService : IAuthenticationService
             Email = userForRegistrationDto.Email,
             Password = userForRegistrationDto.Password
         };
-        //user.Password = _passwordHasher.HashPassword(user, userForRegistrationDto.Password);
         return await _userRepository.CreateAsync(user);
     }
 
