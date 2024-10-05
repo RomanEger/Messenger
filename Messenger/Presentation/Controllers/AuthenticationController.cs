@@ -1,7 +1,6 @@
 using Application.DataTransferObjects;
 using Application.Services.Contracts;
 using Domain.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
@@ -28,21 +27,11 @@ public class AuthenticationController : ControllerBase
     [HttpPost("registration")]
     public async Task<IActionResult> Registration([FromBody] UserForRegistrationDto userForRegistrationDto)
     {
-        if (await _authenticationService.CreateUserAsync(userForRegistrationDto))
-        {
-            await _unitOfWork.SaveChangesAsync();
-            var user = new UserForAuthenticationDto(userForRegistrationDto.Email, userForRegistrationDto.Password);
-            var token = await _authenticationService.LoginAsync(user);
-            return Ok(token);
-        }
-        
-        return BadRequest();
-    }
-
-    [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> GetTest()
-    {
-        return Ok("OK");
+        if (!await _authenticationService.CreateUserAsync(userForRegistrationDto)) 
+            return BadRequest();
+        await _unitOfWork.SaveChangesAsync();
+        var user = new UserForAuthenticationDto(userForRegistrationDto.Email, userForRegistrationDto.Password);
+        var token = await _authenticationService.LoginAsync(user);
+        return Ok(token);
     }
 }
