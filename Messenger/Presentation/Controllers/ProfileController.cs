@@ -37,4 +37,13 @@ public class ProfileController : ControllerBase
         await _unitOfWork.SaveChangesAsync();
         return Ok();
     }
+    
+    [HttpPatch("nickname")]
+    public async Task<IActionResult> ChangeNickName(string newNickName)
+    {
+        if (!await _userProfileManager.ChangeNickName(HttpContext.User.Identity.Name, newNickName)) 
+            return BadRequest();
+        await _unitOfWork.SaveChangesAsync();
+        return Ok();
+    }
 }

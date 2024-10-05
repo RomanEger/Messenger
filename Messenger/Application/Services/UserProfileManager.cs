@@ -22,4 +22,15 @@ public class UserProfileManager : IUserProfileManager
         _userRepository.Update(user);
         return true;
     }
+
+    public async Task<bool> ChangeNickName(string userName, string newNickName)
+    {
+        var user = await _userRepository.FindByConditionAsync(x =>
+            x.UserName == userName);
+        if (user is null) 
+            return false;
+        user.NickName = newNickName;
+        _userRepository.Update(user);
+        return true;
+    }
 }
