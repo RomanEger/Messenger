@@ -1,4 +1,3 @@
-using Application.DataTransferObjects;
 using Application.Services.Contracts;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -22,15 +21,12 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPatch("password")]
-    public async Task<IActionResult> ChangePassword(UserForAuthenticationDto user, string newPassword)
+    public async Task<IActionResult> ChangePassword(string newPassword)
     {
-        if (await _passwordManager.ChangePassword(user, newPassword))
-        {
-            await _unitOfWork.SaveChangesAsync();
-            return Ok();
-        }
-
-        return BadRequest();
+        if (!await _passwordManager.ChangePassword(HttpContext.User.Identity.Name, newPassword)) 
+            return BadRequest();
+        await _unitOfWork.SaveChangesAsync();
+        return Ok();
     }
     
     [HttpPatch("username")]

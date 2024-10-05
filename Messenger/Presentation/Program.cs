@@ -1,12 +1,8 @@
 using Application;
-using Application.Services;
-using Application.Services.Contracts;
-using Domain.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Infrastructure;
-using Infrastructure.Repositories;
 using Presentation.Hubs;
 using Presentation.OptionsSetup;
 using Serilog;

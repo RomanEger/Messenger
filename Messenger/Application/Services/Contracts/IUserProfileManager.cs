@@ -1,5 +1,3 @@
-using Application.DataTransferObjects;
-
 namespace Application.Services.Contracts;
 
 public interface IUserProfileManager
