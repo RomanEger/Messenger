@@ -13,7 +13,8 @@ public static class DependencyInjection
         
         services.AddValidatorsFromAssembly(assembly)
             .AddScoped<IAuthenticationService, AuthenticationService>()
-            .AddScoped<IPasswordManager, PasswordManager>();
+            .AddScoped<IPasswordManager, PasswordManager>()
+            .AddScoped<IUserProfileManager, UserProfileManager>();
         
         return services;
     }

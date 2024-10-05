@@ -10,13 +10,15 @@ namespace Presentation.Controllers;
 [Route("api/profile")]
 public class ProfileController : ControllerBase
 {
+    private readonly IUserProfileManager _userProfileManager;
     private readonly IPasswordManager _passwordManager;
     private readonly IUnitOfWork _unitOfWork;
 
-    public ProfileController(IPasswordManager passwordManager, IUnitOfWork unitOfWork)
+    public ProfileController(IPasswordManager passwordManager, IUnitOfWork unitOfWork, IUserProfileManager userProfileManager)
     {
         _passwordManager = passwordManager;
         _unitOfWork = unitOfWork;
+        _userProfileManager = userProfileManager;
     }
 
     [HttpPatch("password")]
@@ -29,5 +31,14 @@ public class ProfileController : ControllerBase
         }
 
         return BadRequest();
+    }
+    
+    [HttpPatch("username")]
+    public async Task<IActionResult> ChangeUserName(string newUserName)
+    {
+        if (!await _userProfileManager.ChangeUserName(HttpContext.User.Identity.Name, newUserName)) 
+            return BadRequest();
+        await _unitOfWork.SaveChangesAsync();
+        return Ok();
     }
 }
