@@ -20,15 +20,9 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Cd
-      run: cd Messenger
-    - name: Pwd
-      run: pwd
-    - name: Dir
-      run: ls -l
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Messenger
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore Messenger
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal Messenger
