@@ -19,7 +19,9 @@ public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
 
     public async Task<bool> CreateAsync(User newUser)
     {
-        return await dbContext.Users.AddAsync(newUser) is not null;
+        if(newUser.IsValid)
+            return await dbContext.Users.AddAsync(newUser) is not null;
+        return false;
     }
 
     public void Update(User user)

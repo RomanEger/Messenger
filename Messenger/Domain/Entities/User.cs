@@ -86,4 +86,12 @@ public class User : EntityBase
     public ICollection<UserPhoto> UserPhotos { get; set; }
     public ICollection<Message> Messages { get; set; }
     public ICollection<ChatMember> ChatMembers { get; set; }
+
+    [NotMapped]
+    public bool IsValid =>
+            Email is not null
+            && UserName is not null
+            && NickName is not null
+            && Password is not null
+            && PhoneNumber is not null;
 }
