@@ -14,17 +14,17 @@ public class ApplicationDbContext : DbContext
     public DbSet<MessageType> MessageTypes { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<MemberRole> MemberRoles { get; set; }
-    
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
-        : base(options) {}
 
-    public ApplicationDbContext() {}
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+        Database.Migrate();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
         
-        //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MessengerDb;Username=postgres;Password=qwerty");
         optionsBuilder.LogTo(Console.WriteLine);
     }
 }
