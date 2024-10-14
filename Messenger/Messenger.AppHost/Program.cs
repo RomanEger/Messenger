@@ -5,7 +5,6 @@ var postgres = builder.AddPostgres("DataBase")
     .WithPgAdmin();
 
 builder.AddProject<Projects.Presentation>("presentation")
-    .WithHttpsEndpoint()
     .WithReference(postgres);
 
 builder.Build().Run();
