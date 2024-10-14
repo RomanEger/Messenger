@@ -7,14 +7,14 @@ namespace Infrastructure.Repositories;
 
 public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
 {
-    public async Task<User?> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task<User?> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public async Task<User?> FindByConditionAsync(Expression<Func<User, bool>> expression, CancellationToken cancellationToken = default)
+    public Task<User?> FindByConditionAsync(Expression<Func<User, bool>> expression, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Users.AsNoTracking().FirstOrDefaultAsync(expression, cancellationToken);
+        return dbContext.Users.AsNoTracking().FirstOrDefaultAsync(expression, cancellationToken);
     }
 
     public async Task<bool> CreateAsync(User newUser)
@@ -26,7 +26,8 @@ public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
 
     public void Update(User user)
     {
-        dbContext.Users.Update(user);
+        if(user.IsValid)
+            dbContext.Users.Update(user);
     }
 
     public void Delete(User user)
