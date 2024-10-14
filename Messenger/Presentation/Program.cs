@@ -90,4 +90,6 @@ app.MapHub<ChatHub>("/chat");
 
 app.MapControllers();
 
+app.Map("/", async (context) => context.Response.Redirect("/swagger"));
+
 app.Run();
