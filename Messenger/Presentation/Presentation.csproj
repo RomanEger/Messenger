@@ -33,4 +33,8 @@
       <ProjectReference Include="..\Messenger.ServiceDefaults\Messenger.ServiceDefaults.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
+
 </Project>
