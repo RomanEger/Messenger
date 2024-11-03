@@ -83,6 +83,10 @@ public class User : EntityBase
     
     public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
     
+    public string RefreshToken { get; set; }
+    
+    public DateTime RefreshTokenExpiryTime { get; set; }
+
     public ICollection<UserPhoto> UserPhotos { get; set; }
     public ICollection<Message> Messages { get; set; }
     public ICollection<ChatMember> ChatMembers { get; set; }

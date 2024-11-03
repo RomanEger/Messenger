@@ -14,7 +14,8 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(assembly)
             .AddScoped<IAuthenticationService, AuthenticationService>()
             .AddScoped<IPasswordManager, PasswordManager>()
-            .AddScoped<IUserProfileManager, UserProfileManager>();
+            .AddScoped<IUserProfileManager, UserProfileManager>()
+            .AddScoped<ITokenService, TokenService>();
         
         return services;
     }

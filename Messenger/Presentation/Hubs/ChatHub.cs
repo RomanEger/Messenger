@@ -14,13 +14,13 @@ public class ChatHub(ILogger<ChatHub> logger) : Hub
         Notify
     }
     
-    public async Task Send(MessageDto message)
+    public Task Send(MessageDto message)
     {
-        await Clients.All.SendAsync(Method.Receive.ToString(), message.Message);
+        return Clients.All.SendAsync(Method.Receive.ToString(), message.Message);
     }
 
-    public async Task SendByChatId(MessageDto message)
+    public Task SendByChatId(MessageDto message)
     {
-        await Clients.Group(message.ChatId.ToString()).SendAsync(Method.Receive.ToString(), message.Message);
+        return Clients.Group(message.ChatId.ToString()).SendAsync(Method.Receive.ToString(), message.Message);
     }
 }

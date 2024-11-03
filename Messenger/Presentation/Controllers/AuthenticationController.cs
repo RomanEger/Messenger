@@ -10,6 +10,7 @@ public class AuthenticationController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserRepository _userRepository;
     
     public AuthenticationController(IAuthenticationService authenticationService, IUnitOfWork unitOfWork)
     {
@@ -20,8 +21,8 @@ public class AuthenticationController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserForAuthenticationDto userForAuthenticationDto)
     {
-        var token = await _authenticationService.LoginAsync(userForAuthenticationDto);
-        return token == null ? Unauthorized() : Ok(token);
+        var tokenDto = await _authenticationService.LoginAsync(userForAuthenticationDto);
+        return tokenDto == null ? Unauthorized() : Ok(tokenDto);
     }
 
     [HttpPost("registration")]
@@ -33,5 +34,11 @@ public class AuthenticationController : ControllerBase
         var user = new UserForAuthenticationDto(userForRegistrationDto.Email, userForRegistrationDto.Password);
         var token = await _authenticationService.LoginAsync(user);
         return Ok(token);
+    }
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> Refresh([FromBody] TokenDto tokenDto)
+    {
+        return Ok(await _authenticationService.RefreshTokensAsync(tokenDto, _unitOfWork));
     }
 }
