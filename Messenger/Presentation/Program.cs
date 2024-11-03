@@ -60,7 +60,8 @@ builder.Host.UseSerilog((context, configuration) =>
 builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
-    o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase")));
+    o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase"), 
+        optionsAction => optionsAction.MigrationsHistoryTable("Migrations", "migration")));
 
 builder.Services.AddCors();
 
