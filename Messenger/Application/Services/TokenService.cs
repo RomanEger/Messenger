@@ -2,9 +2,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Application.DataTransferObjects;
 using Application.Services.Contracts;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using static Infrastructure.TokenConstants;
 
 namespace Application.Services;
 
@@ -17,7 +19,7 @@ public class TokenService : ITokenService
         _jwtOptions = jwtOptions.Value;
     }
     
-    public string GenerateAccessToken(IEnumerable<Claim> claims)
+    public AccessTokenDto GenerateAccessToken(IEnumerable<Claim> claims)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
@@ -29,13 +31,13 @@ public class TokenService : ITokenService
             _jwtOptions.Audience,
             claims,
             null,
-            DateTime.UtcNow.AddHours(1),
+            DateTime.UtcNow.AddHours(AccessTokenExpiresHour),
             signingCredentials);
 
         var accessToken = new JwtSecurityTokenHandler()
             .WriteToken(token);
 
-        return accessToken;
+        return new AccessTokenDto(accessToken, AccessTokenExpiresHour * SecondsInHour);
     }
     
     public string GenerateRefreshToken()

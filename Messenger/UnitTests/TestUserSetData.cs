@@ -162,7 +162,7 @@ public class TestUserSetData
         }
         catch
         {
-            Assert.Equal(user.Password, null);
+            Assert.Null(user.Password);
         }
     }
 

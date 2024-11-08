@@ -1,10 +1,11 @@
 using System.Security.Claims;
+using Application.DataTransferObjects;
 
 namespace Application.Services.Contracts;
 
 public interface ITokenService
 {
-    string GenerateAccessToken(IEnumerable<Claim> claims);
+    AccessTokenDto GenerateAccessToken(IEnumerable<Claim> claims);
     string GenerateRefreshToken();
     ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
 }

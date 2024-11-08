@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastructure.Migrations.ApplicationDb
+namespace Persistence.Migrations.ApplicationDb
 {
     /// <inheritdoc />
     public partial class AddAttributes : Migration

@@ -8,11 +8,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Migrations.ApplicationDb
+namespace Persistence.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240519123917_AddAttributes")]
-    partial class AddAttributes
+    [Migration("20240519160921_AddMemberRoles")]
+    partial class AddMemberRoles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,12 +78,17 @@ namespace Infrastructure.Migrations.ApplicationDb
                     b.Property<Guid>("ChatId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("MemberRoleId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
+
+                    b.HasIndex("MemberRoleId");
 
                     b.HasIndex("UserId");
 
@@ -108,6 +113,21 @@ namespace Infrastructure.Migrations.ApplicationDb
                     b.HasKey("Id");
 
                     b.ToTable("ChatTypes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MemberRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MemberRoles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Message", b =>
@@ -256,6 +276,12 @@ namespace Infrastructure.Migrations.ApplicationDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.MemberRole", "MemberRole")
+                        .WithMany()
+                        .HasForeignKey("MemberRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("ChatMembers")
                         .HasForeignKey("UserId")
@@ -263,6 +289,8 @@ namespace Infrastructure.Migrations.ApplicationDb
                         .IsRequired();
 
                     b.Navigation("Chat");
+
+                    b.Navigation("MemberRole");
 
                     b.Navigation("User");
                 });

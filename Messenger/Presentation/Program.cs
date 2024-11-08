@@ -2,7 +2,8 @@ using Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Infrastructure;
+using Persistence;
+using Presentation;
 using Presentation.Hubs;
 using Presentation.OptionsSetup;
 using Serilog;
@@ -13,57 +14,12 @@ builder.AddServiceDefaults();
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure();
-
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    OpenApiSecurityScheme securityDefinition = new OpenApiSecurityScheme()
-    {
-        Name = "Bearer",
-        BearerFormat = "JWT",
-        Scheme = "bearer",
-        Description = "Specify the authorization token.",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-    };
-    c.AddSecurityDefinition("jwt_auth", securityDefinition);
-
-    OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
-    {
-        Reference = new OpenApiReference()
-        {
-            Id = "jwt_auth",
-            Type = ReferenceType.SecurityScheme
-        }
-    };
-    OpenApiSecurityRequirement securityRequirements = new OpenApiSecurityRequirement()
-    {
-        {securityScheme, new string[] { }},
-    };
-    c.AddSecurityRequirement(securityRequirements);
-});
-
-builder.Services.ConfigureOptions<JwtOptionsSetup>();
-builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer();
-
-builder.Services.AddAuthorization();
+    .AddInfrastructure()
+    .AddDbContext(builder.Configuration.GetConnectionString("DataBase") ?? throw new ArgumentException("DataBase connection string is null"))
+    .AddPresentation();
 
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
-
-builder.Services.AddSignalR();
-
-builder.Services.AddDbContext<ApplicationDbContext>(o =>
-    o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase"), 
-        optionsAction => optionsAction.MigrationsHistoryTable("Migrations", "migration")));
-
-builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -91,6 +47,10 @@ app.MapHub<ChatHub>("/chat");
 
 app.MapControllers();
 
-app.Map("/", async (context) => context.Response.Redirect("/swagger"));
+app.Map("/", (context) =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+});
 
 app.Run();

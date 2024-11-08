@@ -10,8 +10,7 @@ public class AuthenticationController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IUserRepository _userRepository;
-    
+
     public AuthenticationController(IAuthenticationService authenticationService, IUnitOfWork unitOfWork)
     {
         _authenticationService = authenticationService;

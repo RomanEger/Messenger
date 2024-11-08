@@ -8,11 +8,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Migrations.ApplicationDb
+namespace Persistence.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240519092309_RemoveIdentityDb")]
-    partial class RemoveIdentityDb
+    [Migration("20240510031610_InitialAppCreate")]
+    partial class InitialAppCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
