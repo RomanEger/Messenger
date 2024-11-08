@@ -1,9 +1,9 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure;
+namespace Persistence;
 
-public class ApplicationDbContext : DbContext
+public sealed class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<UserPhoto> UserPhotos { get; set; }
